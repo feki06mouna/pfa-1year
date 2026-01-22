@@ -10,8 +10,8 @@ class StagiaireController extends Controller
     //
     public function formulaire()
     {
-
-        return view('form');
+        $id = null;
+        return view('form', compact('id'));
     }
 
     public function listeStagiaire()
@@ -48,7 +48,7 @@ class StagiaireController extends Controller
         $c->date_fin_stage = $request->date_fin_stage;
 
         if ($c->save()) {
-            return redirect('/liste')->with('msg', 'ajouter avec success');
+            return redirect('/liste')->with('msg', 'Ajouté avec success');
         } else {
             return 'error d\'ajout';
         }
