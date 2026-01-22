@@ -12,8 +12,11 @@
 <div class="container">
     <div class="card my-3">
         <div class="card-header">
-            <h1 class="text-center">Informations d’un stagiaire </h1>
-
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="{{ route('listeStagiaire') }}" class="btn btn-secondary">← Retour à la liste</a>
+                <h1 class="text-center flex-grow-1">Informations d'un stagiaire </h1>
+                <div style="width: 150px;"></div> <!-- Spacer for alignment -->
+            </div>
         </div>
         <div class="card-body">
             <form action="{{is_null($id)?route('addStagiaire'):route('updateStagiaire',['id'=>$id])}}" method="post">
@@ -75,7 +78,7 @@
                         @enderror
                         <label>< Date du fin</label>
                         <input type="date" name="date_fin_stage"
-                               value="{{ old('date_fin_stage', $stagiaire->date_fin_stage ?? '') }}"">
+                               value="{{ old('date_fin_stage', $stagiaire->date_fin_stage ?? '') }}">
                         @error('date_fin_stage')
                         <span class="text-danger"> {{ $message}} </span>
                         @enderror
