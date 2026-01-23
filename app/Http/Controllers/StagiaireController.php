@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class StagiaireController extends Controller
 {
-    //
     public function formulaire()
     {
         $id = null;
@@ -16,17 +15,13 @@ class StagiaireController extends Controller
 
     public function listeStagiaire()
     {
-
-        $Stagiaires = Stagiaire::all(); //njib tout les donnes mil base
-        return view('liste')->with('Stagiaires', $Stagiaires); // ($Stagiaires c'est un tableau)
-        // with..=> affiche $Stagiaires fil page liste(imchi lil liste w hez m3ak variable stagiaires ili fil donnes mta3 $stagiaires)
+        $Stagiaires = Stagiaire::all();
+        return view('liste')->with('Stagiaires', $Stagiaires);
     }
 
-    // b3d mnjib les doones il faut faire un affichage dans la page liste.blade.php
 
     public function addStagiaire(request $request)
     {
-        // dd($request->all()) ;
         $request->validate(
             [
                 'nom' => 'required',
@@ -37,18 +32,18 @@ class StagiaireController extends Controller
                 'date_debut_stage' => 'required|date',
                 'date_fin_stage' => 'required|date|after:date_debut_stage'
             ]
-        ); // le ne formulaire ne reste pas vide
-        $c = new Stagiaire();
-        $c->nom = $request->nom;
-        $c->prenom = $request->prenom;
-        $c->email = $request->email;
-        $c->telephone = $request->telephone;
-        $c->filiere = $request->filiere;
-        $c->date_debut_stage = $request->date_debut_stage;
-        $c->date_fin_stage = $request->date_fin_stage;
+        );
+        $stagiaire = new Stagiaire();
+        $stagiaire->nom = $request->nom;
+        $stagiaire->prenom = $request->prenom;
+        $stagiaire->email = $request->email;
+        $stagiaire->telephone = $request->telephone;
+        $stagiaire->filiere = $request->filiere;
+        $stagiaire->date_debut_stage = $request->date_debut_stage;
+        $stagiaire->date_fin_stage = $request->date_fin_stage;
 
-        if ($c->save()) {
-            return redirect('/liste')->with('msg', 'Ajouté avec success');
+        if ($stagiaire->save()) {
+            return redirect()->route('stagiaire.liste')->with('msg', 'Ajouté avec success');
         } else {
             return 'error d\'ajout';
         }
@@ -56,11 +51,9 @@ class StagiaireController extends Controller
 
     public function deleteStagiaire($id)
     {
-
         $Stagiaire = Stagiaire::find($id);
-
         if ($Stagiaire->delete()) {
-            return redirect(route('listeStagiaire'))->with('msg', 'hetha stagiaire w rt7na mino');
+            return redirect(route('stagiaire.liste'))->with('msg', 'hetha stagiaire w rt7na mino');
         } else {
             return 'error d\'ajout';
         }
@@ -74,7 +67,7 @@ class StagiaireController extends Controller
             if (!$stagiaire)
                 abort(404);
         }
-        return view('form', compact('stagiaire', 'id')); //compact -> liste avec les donnees de stagiaire de la bdd
+        return view('form', compact('stagiaire', 'id'));
     }
 
     public function update(Request $request, $id = null)
@@ -93,7 +86,7 @@ class StagiaireController extends Controller
         } else {
             Stagiaire::create($data);
         }
-        return redirect()->route('listeStagiaire')->with('msg', 'Stagiaire mis à jour avec succès');
+        return redirect()->route('stagiaire.liste')->with('msg', 'Stagiaire mis à jour avec succès');
     }
 
     public function index()
