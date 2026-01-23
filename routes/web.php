@@ -8,20 +8,14 @@ Route::get('/', function () {
 });
 
 
-Route::get('/liste', [StagiaireController::class, 'listeStagiaire']);
-Route::get('/delete/{id}', [StagiaireController::class,'deleteStagiaire']);
+Route::get('/liste', [StagiaireController::class, 'listeStagiaire'])->name('listeStagiaire');
+Route::get('/delete/{id}', [StagiaireController::class,'deleteStagiaire'])->name('deleteStagiaire');
 
+Route::get('/form', [ StagiaireController::class , 'formulaire'])->name('formulaire');
+Route::post('/add', [ StagiaireController::class , 'addStagiaire'])->name('addStagiaire');
 
-Route::get('/form', [ StagiaireController::class , 'formulaire']);
-Route::post('/add', [ StagiaireController::class , 'addStagiaire']);
-
-Route::get('/afficheform/{id}',[StagiaireController::class, 'afficheform']);
-Route::post('/update/{id}',[StagiaireController::class , 'update']);
-
-//Route::middleware('auth')->group(function () {
-//    Route::get('/stagiaires', [StagiaireController::class, 'index']);
-//});
-
+Route::get('/edit/{id}',[StagiaireController::class, 'edit'])->name('editStagiaire');
+Route::post('/update/{id}',[StagiaireController::class , 'update'])->name('updateStagiaire');
 
 
 Auth::routes();
