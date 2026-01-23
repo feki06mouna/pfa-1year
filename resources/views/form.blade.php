@@ -60,8 +60,19 @@
                     <br>
                     <div class="form-group">
                         <label> {{__('Filière')}} : </label>
-                        <input type="text" name="filiere" placeholder="informatique" class="form-control w-75"
-                               value="{{ old('filiere', $stagiaire->filiere ?? '') }}">
+                        <select name="filiere" class="form-control w-75">
+                            <option value="">{{__('Sélectionner une filière')}}</option>
+                            <option
+                                value="informatique" {{ old('filiere', $stagiaire->filiere ?? '') == 'informatique' ? 'selected' : '' }}>{{__('Informatique')}}</option>
+                            <option
+                                value="gestion" {{ old('filiere', $stagiaire->filiere ?? '') == 'gestion' ? 'selected' : '' }}>{{__('Gestion')}}</option>
+                            <option
+                                value="marketing" {{ old('filiere', $stagiaire->filiere ?? '') == 'marketing' ? 'selected' : '' }}>{{__('Marketing')}}</option>
+                            <option
+                                value="finance" {{ old('filiere', $stagiaire->filiere ?? '') == 'finance' ? 'selected' : '' }}>{{__('Finance')}}</option>
+                            <option
+                                value="ressources_humaines" {{ old('filiere', $stagiaire->filiere ?? '') == 'ressources_humaines' ? 'selected' : '' }}>{{__('Ressources Humaines')}}</option>
+                        </select>
                         @error('filiere')
                         <span class="text-danger"> {{ $message}} </span>
                         @enderror
