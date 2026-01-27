@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<!--s'ouvre lorsque tu fais la login-->
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -16,6 +16,10 @@
 
                     {{ __('You are logged in!') }}
                 </div>
+                
+            </div>
+            <div class="text-center mt-1">
+                <a href="/stagiaire/form" class="btn btn-primary">ajouter</a>
             </div>
         </div>
     </div>
